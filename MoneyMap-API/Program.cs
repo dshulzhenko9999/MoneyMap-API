@@ -1,10 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using MoneyMap.API.Data.Context;
 using MoneyMap.API.Extensions.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.RegisterServices();
+builder.Services.AddDbContext<DatabaseContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MoneyMapDb")));
+builder.RegisterAllDependancies();
 
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
