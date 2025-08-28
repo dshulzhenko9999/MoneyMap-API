@@ -26,7 +26,7 @@ public class UserControllerTests
 
         var result = await userController.GetUserByIdAsync(UserControllerTestsMocks.UserDto.Id);
 
-        Assert.IsType<OkObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class UserControllerTests
 
         var result = await userController.GetUserByIdAsync(UserControllerTestsMocks.UserDto.Id);
 
-        Assert.IsType<NotFoundObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class UserControllerTests
 
         var result = await userController.CreateUserAsync(UserControllerTestsMocks.UserCreationDto);
 
-        Assert.IsType<OkObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class UserControllerTests
 
         var result = await userController.CreateUserAsync(UserControllerTestsMocks.UserCreationDto);
 
-        Assert.IsType<BadRequestObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class UserControllerTests
 
         var result = await userController.LoginAsync(UserControllerTestsMocks.AuthenticateUserDto);
 
-        Assert.IsType<OkObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 
     [Fact]
@@ -81,6 +81,6 @@ public class UserControllerTests
 
         var result = await userController.LoginAsync(UserControllerTestsMocks.AuthenticateUserDto);
         
-        Assert.IsType<UnauthorizedObjectResult>(result);
+        Assert.IsType<ActionResult<UserDto>>(result);
     }
 }

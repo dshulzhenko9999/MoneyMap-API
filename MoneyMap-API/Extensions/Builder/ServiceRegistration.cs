@@ -20,7 +20,7 @@ public static class ServiceRegistration
         builder.Services.AddScoped<IUserRepository, UserRepository>();
     }
 
-    public static void RegisterAllDependancies(this WebApplicationBuilder builder)
+    public static void RegisterAllDependencies(this WebApplicationBuilder builder)
     {
         builder.RegisterServices();
         builder.RegisterRepositories();

@@ -40,7 +40,6 @@ public class UserDomainTests
         Assert.IsType<UserDto>(result);
         Assert.Equal(UserDomainTestsMocks.UserCreationDto.Email, result.Email);
         Assert.Equal(UserDomainTestsMocks.UserCreationDto.UserName, result.UserName);
-        Assert.Equal(UserDomainTestsMocks.UserCreationDto.UserName, result.UserName);
     }
 
     [Fact]
