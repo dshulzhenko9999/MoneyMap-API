@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MoneyMap.API</RootNamespace>
+    <UserSecretsId>a7b51b38-cf2e-4606-bf56-ad719b1778d9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
