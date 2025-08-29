@@ -15,7 +15,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
         modelBuilder.Entity<User>()
         .Property(u => u.Id)
         .ValueGeneratedOnAdd();
- 
+
         modelBuilder.Entity<Category>()
             .Property(a => a.Id)
             .ValueGeneratedOnAdd();
@@ -32,6 +32,11 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
         modelBuilder.Entity<Transaction>()
             .Property(a => a.Id)
             .ValueGeneratedOnAdd();
+        modelBuilder.Entity<Transaction>()
+            .HasOne(t => t.Account)
+            .WithMany(a => a.Transactions)
+            .HasForeignKey(t => t.AccountId)
+            .OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Transaction>()
             .HasOne(t => t.Category)
             .WithMany(c => c.Transactions)
