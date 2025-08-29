@@ -14,7 +14,6 @@ public class UserDomainTestsMocks
 
     public readonly static User User = new()
     {
-        Id = UserCreationDto.Id,
         UserName = UserCreationDto.UserName,
         Email = UserCreationDto.Email,
         PasswordHash = [1, 2, 3],

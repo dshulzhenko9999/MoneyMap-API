@@ -6,7 +6,6 @@ public static class UserControllerTestsMocks
 {
     public readonly static UserDto UserDto = new()
     {
-        Id = Guid.NewGuid(),
         UserName = "Test User",
         Email = "test@mail.com"
     };

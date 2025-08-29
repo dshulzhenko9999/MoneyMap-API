@@ -12,6 +12,17 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<User>()
+        .Property(u => u.Id)
+        .ValueGeneratedOnAdd();
+ 
+        modelBuilder.Entity<Category>()
+            .Property(a => a.Id)
+            .ValueGeneratedOnAdd();
+
+        modelBuilder.Entity<Account>()
+           .Property(a => a.Id)
+           .ValueGeneratedOnAdd();
         modelBuilder.Entity<Account>()
             .HasOne(a => a.User)
             .WithMany(u => u.Accounts)
@@ -19,11 +30,8 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.Account)
-            .WithMany(a => a.Transactions)
-            .HasForeignKey(t => t.AccountId)
-            .OnDelete(DeleteBehavior.Cascade);
-
+            .Property(a => a.Id)
+            .ValueGeneratedOnAdd();
         modelBuilder.Entity<Transaction>()
             .HasOne(t => t.Category)
             .WithMany(c => c.Transactions)

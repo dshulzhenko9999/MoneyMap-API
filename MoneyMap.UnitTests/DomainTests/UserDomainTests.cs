@@ -24,7 +24,7 @@ public class UserDomainTests
     [Fact]
     public async Task CreateUserAsync_UserIsNew_Creates()
     {
-        _userRepositoryMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(null as User);
+        _userRepositoryMock.Setup(x => x.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(null as User);
         _userRepositoryMock.Setup(x => x.SaveUserAsync(It.IsAny<User>())).ReturnsAsync(UserDomainTestsMocks.User);
         _passwordServiceMock
             .Setup(x => x.CreatePasswordHash(It.IsAny<string>(), out It.Ref<byte[]>.IsAny, out It.Ref<byte[]>.IsAny))
@@ -45,32 +45,10 @@ public class UserDomainTests
     [Fact]
     public async Task CreateUserAsync_UserIsNotNew_ThrowsInvalidOperationException()
     {
-        _userRepositoryMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(UserDomainTestsMocks.User);
+        _userRepositoryMock.Setup(x => x.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(UserDomainTestsMocks.User);
 
         await Assert.ThrowsAnyAsync<InvalidOperationException>(async () =>
             await _userDomain.CreateUserAsync(UserDomainTestsMocks.UserCreationDto));
-    }
-
-    [Fact]
-    public async Task GetUserByIdAsync_UserExists_ReturnsUserDto()
-    {
-        _userRepositoryMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(UserDomainTestsMocks.User);
-
-        var result = await _userDomain.GetUserByIdAsync(UserDomainTestsMocks.User.Id);
-
-        Assert.IsType<UserDto>(result);
-        Assert.Equal(UserDomainTestsMocks.User.Email, result.Email);
-        Assert.Equal(UserDomainTestsMocks.User.UserName, result.UserName);
-        Assert.Equal(UserDomainTestsMocks.User.Id, result.Id);
-    }
-
-    [Fact]
-    public async Task GetUserByIdAsync_UserDoesNotExist_ThrowsInvalidOperationException()
-    {
-        _userRepositoryMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>())).ReturnsAsync(null as User);
-
-        await Assert.ThrowsAnyAsync<InvalidOperationException>(async () =>
-            await _userDomain.GetUserByIdAsync(UserDomainTestsMocks.User.Id));
     }
 
     [Fact]
@@ -85,7 +63,6 @@ public class UserDomainTests
         Assert.IsType<UserDto>(result);
         Assert.Equal(UserDomainTestsMocks.User.Email, result.Email);
         Assert.Equal(UserDomainTestsMocks.User.UserName, result.UserName);
-        Assert.Equal(UserDomainTestsMocks.User.Id, result.Id);
     }
 
     [Fact]

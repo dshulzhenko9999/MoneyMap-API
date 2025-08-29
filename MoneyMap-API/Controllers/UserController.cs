@@ -9,21 +9,6 @@ namespace MoneyMap.API.Controllers;
 
 public class UserController(IUserDomain userDomain) : Controller
 {
-    [HttpGet]
-    public async Task<ActionResult<UserDto>> GetUserByIdAsync(Guid id)
-    {
-        try
-        {
-            UserDto result = await userDomain.GetUserByIdAsync(id);
-
-            return result;
-        }
-        catch (InvalidOperationException ex)
-        {
-            return NotFound(ex.Message);
-        }
-    }
-
     [HttpPost]
     public async Task<ActionResult<UserDto>> CreateUserAsync(UserCreationDto user)
     {

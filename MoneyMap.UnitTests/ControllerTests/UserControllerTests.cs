@@ -19,28 +19,6 @@ public class UserControllerTests
     }
 
     [Fact]
-    public async Task GetUserByIdAsync_UserFound_ReturnsOkResult()
-    {
-        _userDomainMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>()))
-            .ReturnsAsync(UserControllerTestsMocks.UserDto);
-
-        var result = await userController.GetUserByIdAsync(UserControllerTestsMocks.UserDto.Id);
-
-        Assert.IsType<ActionResult<UserDto>>(result);
-    }
-
-    [Fact]
-    public async Task GetUserByIdAsync_UserNotFound_Throws()
-    {
-        _userDomainMock.Setup(x => x.GetUserByIdAsync(It.IsAny<Guid>()))
-            .ThrowsAsync(new InvalidOperationException());
-
-        var result = await userController.GetUserByIdAsync(UserControllerTestsMocks.UserDto.Id);
-
-        Assert.IsType<ActionResult<UserDto>>(result);
-    }
-
-    [Fact]
     public async Task CreateUserAsync_ValidUser_ReturnsOkResult()
     {
         _userDomainMock.Setup(x => x.CreateUserAsync(It.IsAny<UserCreationDto>()))

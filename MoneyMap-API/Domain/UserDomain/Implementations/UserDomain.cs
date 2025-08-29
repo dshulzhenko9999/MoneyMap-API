@@ -9,9 +9,9 @@ public class UserDomain(IPasswordService passwordService, IUserRepository userRe
 {
     public async Task<UserDto> CreateUserAsync(UserCreationDto user)
     {
-        if (await userRepository.GetUserByIdAsync(user.Id) != null)
+        if (await userRepository.GetUserByEmailAsync(user.Email) != null)
         {
-            throw new InvalidOperationException("User with the same ID already exists");
+            throw new InvalidOperationException("User with this email already exists");
         }
 
         passwordService.CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -20,13 +20,6 @@ public class UserDomain(IPasswordService passwordService, IUserRepository userRe
         var createdUser = await userRepository.SaveUserAsync(newUser);
 
         return UserDto.ToUserDto(createdUser);
-    }
-
-    public async Task<UserDto> GetUserByIdAsync(Guid id)
-    {
-        var user = await userRepository.GetUserByIdAsync(id);
-
-        return user == null ? throw new InvalidOperationException("User not found") : UserDto.ToUserDto(user);
     }
 
     public async Task<UserDto> AuthenticateAsync(AuthenticateUserDto loginRequest)
