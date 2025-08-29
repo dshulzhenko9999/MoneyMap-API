@@ -1,0 +1,1 @@
+[![build and test](https://github.com/dshulzhenko9999/MoneyMap-API/actions/workflows/build-and-test.yaml/badge.svg?branch=main)](https://github.com/dshulzhenko9999/MoneyMap-API/actions/workflows/build-and-test.yaml)
