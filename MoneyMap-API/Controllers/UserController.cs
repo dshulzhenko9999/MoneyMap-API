@@ -18,7 +18,7 @@ public class UserController(IUserDomain userDomain) : Controller
 
             return result;
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
             return NotFound(ex.Message);
         }
@@ -33,7 +33,7 @@ public class UserController(IUserDomain userDomain) : Controller
 
             return result;
         }
-        catch (Exception ex)
+        catch (InvalidOperationException ex)
         {
             return BadRequest(ex.Message);
         }
